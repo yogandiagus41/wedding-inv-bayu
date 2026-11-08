@@ -1,0 +1,275 @@
+/* ==========================================================
+   RESET
+========================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #f5f7fb;
+
+    color: #333;
+
+    display: flex;
+
+    height: 100vh;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.content {
+
+    flex: 1;
+
+    padding: 50px;
+
+    overflow: auto;
+
+}
+
+
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.card {
+
+    max-width: 650px;
+
+    background: #fff;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    box-shadow:
+
+        0 15px 35px rgba(0, 0, 0, .08);
+
+}
+
+.card h1 {
+
+    margin-bottom: 30px;
+
+}
+
+
+
+/* ==========================================================
+   FORM
+========================================================== */
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+
+}
+
+.form-group label {
+
+    font-weight: 600;
+
+}
+
+.form-group input {
+
+    padding: 15px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    outline: none;
+
+}
+
+.form-group input:focus {
+
+    border-color: #2563eb;
+
+}
+
+
+
+/* ==========================================================
+   BUTTON
+========================================================== */
+
+button {
+
+    border: none;
+
+    cursor: pointer;
+
+    padding: 15px 30px;
+
+    border-radius: 10px;
+
+    background: #25D366;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    transition: .3s;
+
+}
+
+button:hover {
+
+    transform: translateY(-2px);
+
+    background: #1ebe5d;
+
+}
+
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media(max-width:768px) {
+
+    body {
+
+        flex-direction: column;
+
+    }
+
+    .sidebar {
+
+        width: 100%;
+
+        padding: 20px;
+
+    }
+
+    .content {
+
+        padding: 20px;
+
+    }
+
+    .card {
+
+        padding: 25px;
+
+    }
+
+}
+
+.guest-card {
+
+    margin-top: 30px;
+
+}
+
+
+#guestList {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+}
+
+
+
+.guest-item {
+
+    padding: 18px;
+
+    border-radius: 15px;
+
+    background: #f9fafb;
+
+    border: 1px solid #eee;
+
+}
+
+
+.guest-item h3 {
+
+    font-size: 16px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.guest-item p {
+
+    color: #7c3aed;
+
+    margin-bottom: 5px;
+
+}
+
+
+.guest-item small {
+
+    color: #888;
+
+}
+
+.card-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+.card-header h1 {
+
+    margin: 0;
+
+}
+
+
+.guest-item {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
