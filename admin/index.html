@@ -1,98 +1,117 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#5c3a46">
+    <title>Kirim Undangan &middot; Shania &amp; Bayu</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Invitation Sender</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="admin.css">
-
 </head>
-
 <body>
 
-
-
-
-    <div class="content">
-
-        <div class="card">
-
-            <h1>
-                Kirim Undangan
-            </h1>
-
-
-            <div class="form-group">
-
-                <label>
-                    Nama Tamu
-                </label>
-
-                <input type="text" id="guestName" placeholder="Contoh : Agus Yogandi">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Kelompok
-                </label>
-
-                <input type="text" id="guestGroup" placeholder="Contoh : Teman Sekolah">
-
-            </div>
-
-
-            <button id="sendWA">
-
-                Kirim WhatsApp
-
-            </button>
-
-
+<header class="top">
+    <div class="top-in">
+        <span class="logo">&hearts;</span>
+        <div>
+            <h1>Kirim Undangan</h1>
+            <p>Shania &amp; Bayu &middot; 11 Desember 2026</p>
         </div>
-
-        <br>
-
-        <!-- LIST TAMU -->
-
-        <div class="card guest-card">
-
-            <div class="card-header">
-
-                <h1>
-                    Undangan Terkirim
-                </h1>
-
-                <button id="resetData" class="btn btn-primary">
-
-                    Reset Semua
-
-                </button>
-
-            </div>
-
-
-            <div id="guestList">
-
-                Belum ada undangan dikirim.
-
-            </div>
-
-
-        </div>
-
-
     </div>
+</header>
 
-    <script src="admin.js"></script>
+<main class="layout">
 
+    <!-- FORM -->
+    <section class="panel form-panel">
+        <h2>Undangan baru</h2>
+
+        <form id="inviteForm" autocomplete="off" novalidate>
+
+            <div class="channel" role="tablist" aria-label="Kirim lewat">
+                <button type="button" class="seg on" data-channel="wa" role="tab" aria-selected="true">WhatsApp</button>
+                <button type="button" class="seg" data-channel="ig" role="tab" aria-selected="false">Instagram</button>
+            </div>
+
+            <div class="field">
+                <label for="guestName">Nama tamu</label>
+                <input type="text" id="guestName" placeholder="Contoh: Agus Yogandi" required>
+            </div>
+
+            <div class="field">
+                <label for="guestGroup">Kelompok</label>
+                <input type="text" id="guestGroup" list="groupOptions" placeholder="Contoh: Teman Sekolah" required>
+                <datalist id="groupOptions"></datalist>
+                <div class="quick" id="quickGroups"></div>
+            </div>
+
+            <div class="field" id="fieldPhone">
+                <label for="guestPhone">Nomor WhatsApp <em>(opsional)</em></label>
+                <input type="tel" id="guestPhone" inputmode="tel" placeholder="Contoh: 081234567890">
+                <small>Diisi: pesan langsung terbuka di chat tamu. Kosong: pilih kontak sendiri di WhatsApp.</small>
+            </div>
+
+            <div class="field" id="fieldIg" hidden>
+                <label for="guestIg">Username Instagram <em>(opsional)</em></label>
+                <input type="text" id="guestIg" placeholder="Contoh: @ags.ndi" autocapitalize="none" autocorrect="off">
+                <small>Instagram tidak bisa mengisi pesan otomatis. Akan muncul panel untuk menyalin pesan dan membuka DM tamu; Anda tinggal menempel (paste) lalu kirim.</small>
+            </div>
+
+            <details class="preview">
+                <summary>Lihat isi pesan</summary>
+                <div class="bubble" id="preview"></div>
+            </details>
+
+            <button type="submit" class="btn-send" id="sendWA">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+                <span id="sendLabel">Kirim via WhatsApp</span>
+            </button>
+        </form>
+    </section>
+
+    <!-- DAFTAR -->
+    <section class="panel list-panel">
+
+        <div class="stats">
+            <div class="stat"><b id="statTotal">0</b><span>Undangan</span></div>
+            <div class="stat"><b id="statGroup">0</b><span>Kelompok</span></div>
+            <div class="stat"><b id="statToday">0</b><span>Hari ini</span></div>
+        </div>
+
+        <div class="toolbar">
+            <div class="search">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                <input type="search" id="search" placeholder="Cari nama tamu...">
+            </div>
+            <button type="button" class="btn-ghost danger" id="resetData">Reset semua</button>
+        </div>
+
+        <div class="chips" id="chips"></div>
+
+        <div id="guestList" class="guest-list"></div>
+    </section>
+
+</main>
+
+<!-- LEMBAR KIRIM INSTAGRAM -->
+<div class="sheet" id="igSheet" hidden>
+    <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="igTitle">
+        <h3 id="igTitle">Kirim lewat Instagram</h3>
+        <p class="sheet-sub" id="igTo"></p>
+        <div class="bubble" id="igMsg"></div>
+
+        <button type="button" class="btn-send ig" id="igCopy">1. Salin pesan</button>
+        <a class="open-link" id="igOpen" href="#" target="_blank" rel="noopener">2. Buka DM Instagram</a>
+        <button type="button" class="btn-ghost" id="igShare" hidden>Atau bagikan lewat menu HP</button>
+        <button type="button" class="btn-ghost" id="igClose">Tutup</button>
+        <small>Instagram tidak bisa mengisi pesan otomatis. Salin pesan dulu, buka DM, lalu tempel (paste) dan kirim.</small>
+    </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="admin.js"></script>
 </body>
-
 </html>
